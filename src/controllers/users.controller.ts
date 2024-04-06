@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { CreateUserDto } from '@dtos/users.dto';
+import { CreateUserDto, GetUsersDto } from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
 import userService from '@services/users.service';
 
@@ -8,6 +8,7 @@ class UsersController {
 
   public getUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
+      const query = req.query as GetUsersDto;
       const findAllUsersData: User[] = await this.userService.findAllUser();
 
       res.status(200).json({ data: findAllUsersData, message: 'findAll' });
