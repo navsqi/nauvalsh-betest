@@ -35,7 +35,7 @@ describe('Testing Auth', () => {
 
       (mongoose as any).connect = jest.fn();
       const app = new App([authRoute]);
-      const { body, statusCode } = await request(app.getServer()).post(`${authRoute.path}signup`).send(userData);
+      const { body, statusCode } = await request(app.getServer()).post(`${authRoute.path}/signup`).send(userData);
       expect(signupSpy).toHaveBeenCalled();
       expect(statusCode).toBe(201);
       expect(body).toHaveProperty('data._id', expect.any(String));
@@ -61,7 +61,7 @@ describe('Testing Auth', () => {
 
       (mongoose as any).connect = jest.fn();
       const app = new App([authRoute]);
-      const { body, statusCode } = await request(app.getServer()).post(`${authRoute.path}login`).send(userData);
+      const { body, statusCode } = await request(app.getServer()).post(`${authRoute.path}/login`).send(userData);
 
       expect(loginSpy).toHaveBeenCalled();
       expect(statusCode).toBe(200);
