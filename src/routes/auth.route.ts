@@ -5,7 +5,7 @@ import validationMiddleware from '@middlewares/validation.middleware';
 import { Router } from 'express';
 
 class AuthRoute implements Routes {
-  public path = '/api/v1/auth/';
+  public path = '/api/v1/auth';
   public router = Router();
   public authController = new AuthController();
 
@@ -14,8 +14,8 @@ class AuthRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.post(`${this.path}signup`, validationMiddleware(CreateUserDto, 'body'), this.authController.signUp);
-    this.router.post(`${this.path}login`, validationMiddleware(LoginDto, 'body'), this.authController.logIn);
+    this.router.post(`${this.path}/signup`, validationMiddleware(CreateUserDto, 'body'), this.authController.signUp);
+    this.router.post(`${this.path}/login`, validationMiddleware(LoginDto, 'body'), this.authController.logIn);
   }
 }
 

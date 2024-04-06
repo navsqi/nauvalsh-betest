@@ -1,11 +1,24 @@
+openapi: 3.0.0
+
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: >-
+      Enter the token with the `Bearer: ` prefix, e.g. "Bearer abcde12345".
+
+
 tags:
 - name: users
   description: users API
 
 paths:
 # [GET] users
-  /users:
+  /api/v1/users:
     get:
+      security:
+        - Bearer: []
       tags:
       - users
       summary: Find All Users
@@ -26,7 +39,7 @@ paths:
         description: user Data
         required: true
         schema:
-          $ref: '#/definitions/users'
+          $ref: '#/definitions/api/v1/users'
       responses:
         201:
           description: 'Created'
@@ -38,7 +51,7 @@ paths:
           description: 'Server Error'
 
 # [GET] users/id
-  /users/{id}:
+  /api/v1/users/{id}:
     get:
       tags:
       - users
@@ -71,7 +84,7 @@ paths:
         description: user Data
         required: true
         schema:
-          $ref: '#/definitions/users'
+          $ref: '#/definitions/api/v1/users'
       responses:
         200:
           description: 'OK'

@@ -5,7 +5,9 @@ const userSchema: Schema = new Schema({
   emailAddress: {
     type: String,
     required: true,
-    unique: true,
+    index: {
+      unique: true,
+    },
   },
   password: {
     type: String,
@@ -14,16 +16,21 @@ const userSchema: Schema = new Schema({
   userName: {
     type: String,
     requied: true,
+    index: {
+      unique: true,
+    },
   },
   accountNumber: {
     type: String,
     required: true,
+    index: true,
   },
   identityNumber: {
     type: String,
     required: true,
     minLength: 16,
     maxLength: 16,
+    index: true,
   },
 });
 
