@@ -58,4 +58,26 @@ npm run test
 ```
 
 ### Postman
-Import postman collection & environtment from `./postman`. Update URL into `codeid-jenius-betest.nauvalsh.com`
+Import postman collection & environment from `./postman`. Update URL into `codeid-jenius-betest.nauvalsh.com`
+
+
+
+### Example curl
+
+#### Login
+```bash
+curl --location 'codeid-jenius-betest.nauvalsh.com/api/v1/auth/login' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic YmFzaWNfYXV0aDpiYXNpY19hdXRo' \
+--data-raw '{
+    "userName": "nauvalsh@gmail.com",
+    "password": "123"
+}'
+```
+
+
+#### Get Users
+```bash
+curl --location 'codeid-jenius-betest.nauvalsh.com/api/v1/users?identityNumber=3173111111111002' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjEyNDE4ZDZjODBjYmIyODdmZTI1ZjEiLCJpYXQiOjE3MTI0OTY4MzIsImV4cCI6MTcxMjUwMDQzMn0.KMhBg3w5APuqtRH_zVJYS80fFG3wJUYNnmOOr_WC6_I'
+```
