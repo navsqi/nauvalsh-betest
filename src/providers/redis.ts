@@ -45,6 +45,7 @@ const GetAsync = promisify(redisClient.get).bind(redisClient);
 const SetAsync = promisify(redisClient.setex).bind(redisClient);
 const DelAsync = promisify(redisClient.del).bind(redisClient);
 const FlushAsync = promisify(redisClient.flushall).bind(redisClient);
+const QuitAsync = promisify(redisClient.quit).bind(redisClient);
 
 // contoh penggunaan: const dataAllProfile = await redisGetAsync("allProfile");
 export const redisGetAsync = GetAsync;
@@ -52,6 +53,7 @@ export const redisGetAsync = GetAsync;
 export const redisSetAsync = SetAsync;
 export const redisDelAsync = DelAsync;
 export const redisFlushAsync = FlushAsync;
+export const redisQuitAsync = QuitAsync;
 
 export const generateRedisKey = {
   getUsers: (hashFilter: string) => `redis_user_${hashFilter}_betest`,

@@ -21,7 +21,6 @@ import mongoose from 'mongoose';
 import request from 'supertest';
 
 beforeAll(async () => {
-  jest.spyOn(logger, 'info').mockImplementation(jest.fn());
   jest.setTimeout(10000);
 });
 afterAll(async () => {
