@@ -9,7 +9,7 @@ class UserService {
   public users = userModel;
 
   public async findAllUser(filter: GetUsersDto): Promise<User[]> {
-    const users: User[] = await this.users.find().select('-password');
+    const users: User[] = await this.users.find({ ...filter }).select('-password');
     return users;
   }
 

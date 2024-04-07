@@ -52,3 +52,7 @@ export const redisGetAsync = GetAsync;
 export const redisSetAsync = SetAsync;
 export const redisDelAsync = DelAsync;
 export const redisFlushAsync = FlushAsync;
+
+export const generateRedisKey = {
+  getUsers: (hashFilter: string) => `redis_user_${hashFilter}_betest`,
+};

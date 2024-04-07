@@ -31,15 +31,15 @@ export class LoginDto {
 export class GetUsersDto {
   @IsEmail()
   @IsOptional()
-  public emailAddress: string;
+  public emailAddress?: string;
 
   @IsString()
   @IsOptional()
-  public userName: string;
+  public userName?: string;
 
   @IsString()
   @IsOptional()
-  public accountNumber: string;
+  public accountNumber?: string;
 
   @IsString()
   @Length(16, 16)

@@ -2,14 +2,28 @@ import { NextFunction, Request, Response } from 'express';
 import { CreateUserDto, GetUsersDto } from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
 import userService from '@services/users.service';
+import { generateRedisKey, redisGetAsync, redisSetAsync } from '@/providers/redis';
+import { URLSearchParams } from 'url';
+import { md5 } from '@/utils/hash';
 
 class UsersController {
   public userService = new userService();
 
   public getUsers = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const query = req.query as GetUsersDto;
-      const findAllUsersData: User[] = await this.userService.findAllUser();
+      const query = req.query as unknown as GetUsersDto;
+
+      const hashFilter = md5(new URLSearchParams({ ...query }).toString());
+      const redisKey = generateRedisKey.getUsers(hashFilter);
+      const cache = await redisGetAsync(redisKey);
+
+      let findAllUsersData: User[];
+
+      if (cache) findAllUsersData = JSON.parse(cache);
+      else {
+        findAllUsersData = await this.userService.findAllUser(query);
+        await redisSetAsync(redisKey, 3600, JSON.stringify(findAllUsersData));
+      }
 
       res.status(200).json({ data: findAllUsersData, message: 'findAll' });
     } catch (error) {
