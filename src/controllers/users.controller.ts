@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { CreateUserDto, GetUsersDto } from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
 import userService from '@services/users.service';
-import { generateRedisKey, redisGetAsync, redisSetAsync } from '@/providers/redis';
+import { generateRedisKey, redisDelAsync, redisGetAsync, redisSetAsync } from '@/providers/redis';
 import { URLSearchParams } from 'url';
 import { md5 } from '@/utils/hash';
 
@@ -47,6 +47,12 @@ class UsersController {
       const userId: string = req.params.id;
       const userData: CreateUserDto = req.body;
       const updateUserData: User = await this.userService.updateUser(userId, userData);
+
+      const hashFilter = [md5(new URLSearchParams({}).toString()), md5(new URLSearchParams({ ...userData }).toString())];
+      for (const h of hashFilter) {
+        const redisKey = generateRedisKey.getUsers(h);
+        await redisDelAsync(redisKey);
+      }
 
       res.status(200).json({ data: updateUserData, message: 'updated' });
     } catch (error) {
