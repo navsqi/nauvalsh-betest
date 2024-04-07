@@ -53,6 +53,7 @@ const logger = winston.createLogger({
 logger.add(
   new winston.transports.Console({
     format: winston.format.combine(winston.format.splat(), winston.format.colorize()),
+    silent: process.env.NODE_ENV == 'test',
   }),
 );
 

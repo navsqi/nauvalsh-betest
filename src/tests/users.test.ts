@@ -15,7 +15,6 @@ jest.mock('../middlewares/auth.middleware.ts', () =>
 import App from '@/app';
 import { CreateUserDto } from '@/dtos/users.dto';
 import { redisQuitAsync } from '@/providers/redis';
-import { logger } from '@/utils/logger';
 import UsersRoute from '@routes/users.route';
 import mongoose from 'mongoose';
 import request from 'supertest';
