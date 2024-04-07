@@ -4,11 +4,15 @@ import request from 'supertest';
 import App from '@/app';
 import { CreateUserDto, LoginDto } from '@dtos/users.dto';
 import AuthRoute from '@routes/auth.route';
+import { redisQuitAsync } from '@/providers/redis';
+import { logger } from '@/utils/logger';
 
 beforeAll(async () => {
+  jest.spyOn(logger, 'info').mockImplementation(jest.fn());
   jest.setTimeout(10000);
 });
 afterAll(async () => {
+  await redisQuitAsync();
   await new Promise<void>(resolve => setTimeout(() => resolve(), 500));
 });
 

@@ -2,13 +2,13 @@ import { IsEmail, IsOptional, IsString, Length, ValidateIf } from 'class-validat
 
 export class CreateUserDto {
   @IsEmail()
-  public emailAddress: string;
+  public emailAddress?: string;
 
   @IsString()
-  public password: string;
+  public password?: string;
 
   @IsString()
-  public userName: string;
+  public userName?: string;
 
   @IsString()
   @Length(16, 16)
