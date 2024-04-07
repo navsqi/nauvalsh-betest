@@ -6,6 +6,71 @@
 - **Redis:** in-memory storage, used as a distributed, in-memory key–value database and cache
 - **Testing with Jest:** Write unit tests and run them using the Jest testing framework.
 - **Docker Integration:** Easily containerize your application using Docker for simplified deployment and scalability.
+- **User Authentication:** Includes a pre-configured user authentication system with password hashing using bcrypt and JWT-based authentication.
+
+
+## Directory Structure
+```bash
+│
+├───postman
+│       be-test.postman_environment.json
+│       nauvalsh-betest-api.postman_collection.json
+│
+└───src
+    │   app.ts
+    │   server.ts
+    │
+    ├───config
+    │       index.ts
+    │
+    ├───controllers
+    │       auth.controller.ts
+    │       index.controller.ts
+    │       users.controller.ts
+    │
+    ├───databases
+    │       index.ts
+    │
+    ├───dtos
+    │       users.dto.ts
+    │
+    ├───exceptions
+    │       HttpException.ts
+    │
+    ├───interfaces
+    │       auth.interface.ts
+    │       routes.interface.ts
+    │       users.interface.ts
+    │
+    ├───middlewares
+    │       auth.middleware.ts
+    │       error.middleware.ts
+    │       validation.middleware.ts
+    │
+    ├───models
+    │       users.model.ts
+    │
+    ├───providers
+    │       redis.ts
+    │
+    ├───routes
+    │       auth.route.ts
+    │       users.route.ts
+    │
+    ├───services
+    │       auth.service.ts
+    │       users.service.ts
+    │
+    ├───tests
+    │       auth.test.ts
+    │       users.test.ts
+    │       
+    └───utils
+            hash.ts
+            logger.ts
+            util.ts
+            validateEnv.ts
+```
 
 ## ⚒ How to Install
 
@@ -45,19 +110,19 @@ REDIS_AUTH=masterpass
 
 ```
 
-### Container
+## Container
 ```bash
 make build-dev
 docker run -p 3001:3001 -d --name nauvalsh-betest  nauvalsh-betest:latest
 ```
 
 
-### Unit Testing
+## Unit Testing
 ```bash
 npm run test
 ```
 
-### Postman
+## Postman
 Import postman collection & environment from `./postman`. Update URL into `codeid-jenius-betest.nauvalsh.com`
 
 
