@@ -1,7 +1,10 @@
+import { generateRedisKey, redisDelAsync } from '@/providers/redis';
+import { md5 } from '@/utils/hash';
 import { CreateUserDto, LoginDto } from '@dtos/users.dto';
 import { User } from '@interfaces/users.interface';
 import AuthService from '@services/auth.service';
 import { NextFunction, Request, Response } from 'express';
+import { URLSearchParams } from 'url';
 
 class AuthController {
   public authService = new AuthService();
@@ -11,6 +14,10 @@ class AuthController {
       const userData: CreateUserDto = req.body;
       const signUpUserData: User = await this.authService.signup(userData);
       signUpUserData.password = undefined;
+
+      const hashFilter = md5(new URLSearchParams({ }).toString());
+      const redisKey = generateRedisKey.getUsers(hashFilter);
+      await redisDelAsync(redisKey);
 
       res.status(201).json({ data: signUpUserData, message: 'signup' });
     } catch (error) {

@@ -56,3 +56,6 @@ docker run -p 3001:3001 -d --name nauvalsh-betest  nauvalsh-betest:latest
 ```bash
 npm run test
 ```
+
+### Postman
+Import postman collection & environtment from `./postman`. Update URL into `codeid-jenius-betest.nauvalsh.com`
